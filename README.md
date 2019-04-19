@@ -1,4 +1,4 @@
-# Log-Rotation-Script
+# Automated-Log-Rotation-Script
 This was the assignment I had to complete for one of my courses:
 
 Build a log rotation script. Here are the requirements:
