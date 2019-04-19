@@ -1,0 +1,26 @@
+#!/bin/bash
+#crontab = 0 * * * * (script loc.)
+logs=logs_$(date +%F_%T)
+archive=archive_$(date +%F_%T).tar.gz
+cp /var/log/messages /home/$logs
+mv home/$logs /home
+tar -czvf $archive $logs
+rm $logs
+Hrs=(date +%H)
+for x in `find . -name “archive*”`
+	do
+		hour=$( echo “$x” | cut -c 23-24 )
+		time=$(($Hrs – 7))
+		if [ $time -le 0]; then
+			$time=$(($time + 24))
+		fi
+		if [ $time -gt $hour ]; then
+			rm -f $x
+		fi
+	done
+chgrp nobody $archive
+chmod 760 $archive
+
+
+
+
